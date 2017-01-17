@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Артём Козлов](https://up.htmlacademy.ru/javascript/8/user/109874).
-* Наставник: `Неизвестно`.
+* Наставник: [Алексей Дмитриев](https://up.htmlacademy.ru/javascript/8/user/245991).
 
 ---
 
