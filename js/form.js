@@ -33,13 +33,13 @@ function clickUploadFilter(clickedFilter) {
     var filterId = clickedFilter.getAttribute('id');
     var classToAdd = filterId.slice(7);
     toggleUploadFilter(classToAdd);
-    console.log(filterId);
+    // console.log(filterId);
   });
 }
 //
 // Как правильно найти и убрать добавленный класс к filterImagePreview, при смене фильтра?
 //
 function toggleUploadFilter(classToAdd) {
-  console.log(filterImagePreview.classList);
+  // console.log(filterImagePreview.classList);
   filterImagePreview.classList.add(classToAdd);
 }
