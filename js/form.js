@@ -26,10 +26,10 @@ var uploadFilterList = uploadFilterControls.querySelectorAll('input[type="radio"
 var lastSelectedClass;
 
 for (var i = 0; i < uploadFilterList.length; i++) {
-  uploadFilterList[i].addEventListener('click', function () {
+  uploadFilterList[i].addEventListener('click', function (event) {
     filterImagePreview.classList.remove(lastSelectedClass);
 
-    var classToAdd = this.getAttribute('id').slice(7);
+    var classToAdd = event.target.getAttribute('id').slice(7);
     filterImagePreview.classList.add(classToAdd);
     lastSelectedClass = classToAdd;
   });
@@ -40,10 +40,10 @@ var resizeButtonDec = uploadOverlay.querySelector('.upload-resize-controls-butto
 var resizeButtonInc = uploadOverlay.querySelector('.upload-resize-controls-button-inc');
 var resizeControlsField = uploadOverlay.querySelector('.upload-resize-controls-value');
 
-function resizeImg(nameOfButton) {
+function resizeImg(event) {
   var currentValue = parseInt(resizeControlsField.getAttribute('value'), 10);
 
-  if (nameOfButton === resizeButtonDec) {
+  if (event.target === resizeButtonDec) {
 
     if (currentValue === 25) {
       currentValue = 25;
@@ -56,7 +56,7 @@ function resizeImg(nameOfButton) {
     filterImagePreview.style.webkitTransform = 'scale(' + currentValue / 100 + ')';
   }
 
-  if (nameOfButton === resizeButtonInc) {
+  if (event.target === resizeButtonInc) {
 
     if (currentValue === 100) {
       currentValue = 100;
@@ -70,9 +70,5 @@ function resizeImg(nameOfButton) {
   }
 
 }
-resizeButtonDec.addEventListener('click', function () {
-  resizeImg(resizeButtonDec);
-});
-resizeButtonInc.addEventListener('click', function () {
-  resizeImg(resizeButtonInc);
-});
+resizeButtonDec.addEventListener('click', resizeImg);
+resizeButtonInc.addEventListener('click', resizeImg);
