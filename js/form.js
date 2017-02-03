@@ -32,7 +32,6 @@ for (var i = 0; i < uploadFilterList.length; i++) {
     var classToAdd = this.getAttribute('id').slice(7);
     filterImagePreview.classList.add(classToAdd);
     lastSelectedClass = classToAdd;
-    console.log(classToAdd);
   });
 }
 
@@ -40,11 +39,9 @@ for (var i = 0; i < uploadFilterList.length; i++) {
 var resizeButtonDec = uploadOverlay.querySelector('.upload-resize-controls-button-dec');
 var resizeButtonInc = uploadOverlay.querySelector('.upload-resize-controls-button-inc');
 var resizeControlsField = uploadOverlay.querySelector('.upload-resize-controls-value');
-console.dir(resizeControlsField);
-console.log(resizeControlsField.getAttribute('value'));
 
 function resizeImg(nameOfButton) {
-  var currentValue = parseInt(resizeControlsField.getAttribute('value'));
+  var currentValue = parseInt(resizeControlsField.getAttribute('value'), 10);
 
   if (nameOfButton === resizeButtonDec) {
 
@@ -54,9 +51,9 @@ function resizeImg(nameOfButton) {
       currentValue = currentValue - 25;
     }
     resizeControlsField.setAttribute('value', currentValue + '%');
-    filterImagePreview.style.transform = 'scale(' + currentValue/100 + ')';
-    filterImagePreview.style.msTransform = 'scale(' + currentValue/100 + ')';
-    filterImagePreview.style.webkitTransform = 'scale(' + currentValue/100 + ')';
+    filterImagePreview.style.transform = 'scale(' + currentValue / 100 + ')';
+    filterImagePreview.style.msTransform = 'scale(' + currentValue / 100 + ')';
+    filterImagePreview.style.webkitTransform = 'scale(' + currentValue / 100 + ')';
   }
 
   if (nameOfButton === resizeButtonInc) {
@@ -67,9 +64,9 @@ function resizeImg(nameOfButton) {
       currentValue = currentValue + 25;
     }
     resizeControlsField.setAttribute('value', currentValue + '%');
-    filterImagePreview.style.transform = 'scale(' + currentValue/100 + ')';
-    filterImagePreview.style.msTransform = 'scale(' + currentValue/100 + ')';
-    filterImagePreview.style.webkitTransform = 'scale(' + currentValue/100 + ')';
+    filterImagePreview.style.transform = 'scale(' + currentValue / 100 + ')';
+    filterImagePreview.style.msTransform = 'scale(' + currentValue / 100 + ')';
+    filterImagePreview.style.webkitTransform = 'scale(' + currentValue / 100 + ')';
   }
 
 }
