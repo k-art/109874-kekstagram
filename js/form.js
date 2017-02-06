@@ -44,19 +44,23 @@ resizeControlsField.setAttribute('value', '100%');
 
 function resizeImg(event) {
   var currentValue = parseInt(resizeControlsField.getAttribute('value'), 10);
+  var scaleValue = currentValue / 100;
+  var MIN_VALUE = 25;
+  var MAX_VALUE = 100;
+  var STEP = 25;
 
-  if (event.target === resizeButtonDec && currentValue !== 25) {
-    currentValue -= 25;
+  if (event.target === resizeButtonDec && currentValue !== MIN_VALUE) {
+    currentValue -= STEP;
   }
 
-  if (event.target === resizeButtonInc && currentValue !== 100) {
-    currentValue += 25;
+  if (event.target === resizeButtonInc && currentValue !== MAX_VALUE) {
+    currentValue += STEP;
   }
 
   resizeControlsField.setAttribute('value', currentValue + '%');
-  filterImagePreview.style.transform = 'scale(' + currentValue / 100 + ')';
-  filterImagePreview.style.msTransform = 'scale(' + currentValue / 100 + ')';
-  filterImagePreview.style.webkitTransform = 'scale(' + currentValue / 100 + ')';
+  filterImagePreview.style.transform = 'scale(' + scaleValue + ')';
+  filterImagePreview.style.msTransform = 'scale(' + scaleValue + ')';
+  filterImagePreview.style.webkitTransform = 'scale(' + scaleValue + ')';
 }
 resizeButtonDec.addEventListener('click', resizeImg);
 resizeButtonInc.addEventListener('click', resizeImg);
