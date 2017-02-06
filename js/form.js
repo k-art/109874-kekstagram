@@ -44,7 +44,7 @@ resizeControlsField.setAttribute('value', '100%');
 
 function resizeImg(event) {
   var currentValue = parseInt(resizeControlsField.getAttribute('value'), 10);
-  var scaleValue = currentValue / 100;
+
   var MIN_VALUE = 25;
   var MAX_VALUE = 100;
   var STEP = 25;
@@ -56,6 +56,7 @@ function resizeImg(event) {
   if (event.target === resizeButtonInc && currentValue !== MAX_VALUE) {
     currentValue += STEP;
   }
+  var scaleValue = currentValue / 100;
 
   resizeControlsField.setAttribute('value', currentValue + '%');
   filterImagePreview.style.transform = 'scale(' + scaleValue + ')';
