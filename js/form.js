@@ -40,35 +40,23 @@ var resizeButtonDec = uploadOverlay.querySelector('.upload-resize-controls-butto
 var resizeButtonInc = uploadOverlay.querySelector('.upload-resize-controls-button-inc');
 var resizeControlsField = uploadOverlay.querySelector('.upload-resize-controls-value');
 
+resizeControlsField.setAttribute('value', '100%');
+
 function resizeImg(event) {
   var currentValue = parseInt(resizeControlsField.getAttribute('value'), 10);
 
-  if (event.target === resizeButtonDec) {
-
-    if (currentValue === 25) {
-      currentValue = 25;
-    } else {
-      currentValue = currentValue - 25;
-    }
-    resizeControlsField.setAttribute('value', currentValue + '%');
-    filterImagePreview.style.transform = 'scale(' + currentValue / 100 + ')';
-    filterImagePreview.style.msTransform = 'scale(' + currentValue / 100 + ')';
-    filterImagePreview.style.webkitTransform = 'scale(' + currentValue / 100 + ')';
+  if (event.target === resizeButtonDec && currentValue !== 25) {
+    currentValue -= 25;
   }
 
-  if (event.target === resizeButtonInc) {
-
-    if (currentValue === 100) {
-      currentValue = 100;
-    } else {
-      currentValue = currentValue + 25;
-    }
-    resizeControlsField.setAttribute('value', currentValue + '%');
-    filterImagePreview.style.transform = 'scale(' + currentValue / 100 + ')';
-    filterImagePreview.style.msTransform = 'scale(' + currentValue / 100 + ')';
-    filterImagePreview.style.webkitTransform = 'scale(' + currentValue / 100 + ')';
+  if (event.target === resizeButtonInc && currentValue !== 100) {
+    currentValue += 25;
   }
 
+  resizeControlsField.setAttribute('value', currentValue + '%');
+  filterImagePreview.style.transform = 'scale(' + currentValue / 100 + ')';
+  filterImagePreview.style.msTransform = 'scale(' + currentValue / 100 + ')';
+  filterImagePreview.style.webkitTransform = 'scale(' + currentValue / 100 + ')';
 }
 resizeButtonDec.addEventListener('click', resizeImg);
 resizeButtonInc.addEventListener('click', resizeImg);
