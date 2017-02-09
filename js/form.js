@@ -7,12 +7,12 @@ var uploadFile = upload.querySelector('#upload-file');
 var uploadOverlay = upload.querySelector('.upload-overlay');
 var uploadCancel = upload.querySelector('#upload-cancel');
 
-// var ENTER_KEY_CODE = 13;
+var ENTER_KEY_CODE = 13;
 var ESCAPE_KEY_CODE = 27;
 
-// var isActivateEvent = function (event) {
-//   return event.keyCode && event.keyCode === ENTER_KEY_CODE;
-// };
+var isActivateEvent = function (event) {
+  return event.keyCode && event.keyCode === ENTER_KEY_CODE;
+};
 
 // закрытие модального окна по Esc
 var escKeydownHandler = function (event) {
@@ -29,6 +29,15 @@ var showModal = function () {
 
   document.addEventListener('keydown', escKeydownHandler);
   uploadFilterControls.addEventListener('change', changeFilter);
+
+  uploadFilterControls.addEventListener('keyup', function (event) {
+    var target = event.target;
+    if (isActivateEvent && target.tagName.toLowerCase() === 'label') {
+      var relativeInput = target.previousElementSibling;
+      // console.log(relativeInput);
+      target.addEventListener('click', changeFilter(relativeInput));
+    }
+  });
 };
 
 // закрытие модального окна
@@ -42,19 +51,19 @@ var hideModal = function () {
 
 var filterImagePreview = upload.querySelector('.filter-image-preview');
 var uploadFilterControls = upload.querySelector('.upload-filter-controls');
-// var uploadFilterList = uploadFilterControls.querySelectorAll('input[type="radio"]');
 var lastSelectedClass;
 
 // Применение фильтра к изображению
 var changeFilter = function (event) {
-  filterImagePreview.classList.remove(lastSelectedClass);
   var target = event.target;
 
   if (target.tagName.toLowerCase() === 'input' && target.getAttribute('name') === 'upload-filter') {
     var classToAdd = target.getAttribute('id').slice(7);
+
+    filterImagePreview.classList.remove(lastSelectedClass);
+    filterImagePreview.classList.add(classToAdd);
+    lastSelectedClass = classToAdd;
   }
-  filterImagePreview.classList.add(classToAdd);
-  lastSelectedClass = classToAdd;
 };
 
 uploadFile.addEventListener('change', function () {
