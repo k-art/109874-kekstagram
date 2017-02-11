@@ -15,11 +15,11 @@ var isActivateEvent = function (event) {
 };
 
 var isLabel = function (event) {
-  return event.target.tagName.toLowerCase() === 'label';
+  return event.target.tagName.toLowerCase();
 };
 
 var enterFilterHandler = function (event) {
-  if (isActivateEvent(event) && isLabel(event)) {
+  if (isActivateEvent(event) && isLabel(event) === 'label') {
     event.target.click();
   }
 };
