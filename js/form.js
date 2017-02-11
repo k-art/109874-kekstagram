@@ -14,12 +14,12 @@ var isActivateEvent = function (event) {
   return event.keyCode && event.keyCode === ENTER_KEY_CODE;
 };
 
-var isLabel = function (event) {
-  return event.target.tagName.toLowerCase();
+var isLabel = function (element) {
+  return element.tagName.toLowerCase() === 'label';
 };
 
 var enterFilterHandler = function (event) {
-  if (isActivateEvent(event) && isLabel(event) === 'label') {
+  if (isActivateEvent(event) && isLabel(event.target)) {
     event.target.click();
   }
 };
