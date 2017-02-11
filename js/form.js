@@ -14,6 +14,16 @@ var isActivateEvent = function (event) {
   return event.keyCode && event.keyCode === ENTER_KEY_CODE;
 };
 
+var isLabel = function (event) {
+  return event.target.tagName.toLowerCase() === 'label';
+};
+
+var enterFilterHandler = function (event) {
+  if (isActivateEvent(event) && isLabel(event)) {
+    event.target.click();
+  }
+};
+
 // закрытие модального окна по Esc
 var escKeydownHandler = function (event) {
   if (event.keyCode && event.keyCode === ESCAPE_KEY_CODE) {
@@ -28,16 +38,9 @@ var showModal = function () {
   uploadSelectImage.classList.add('invisible');
 
   document.addEventListener('keydown', escKeydownHandler);
-  uploadFilterControls.addEventListener('change', changeFilter);
 
-  uploadFilterControls.addEventListener('keyup', function (event) {
-    var target = event.target;
-    if (isActivateEvent && target.tagName.toLowerCase() === 'label') {
-      var relativeInput = target.previousElementSibling;
-      // console.log(relativeInput);
-      target.addEventListener('click', changeFilter(relativeInput));
-    }
-  });
+  uploadFilterControls.addEventListener('change', changeFilter);
+  uploadFilterControls.addEventListener('keyup', enterFilterHandler);
 };
 
 // закрытие модального окна
@@ -46,7 +49,9 @@ var hideModal = function () {
   uploadSelectImage.classList.remove('invisible');
 
   document.removeEventListener('keydown', escKeydownHandler);
+
   uploadFilterControls.removeEventListener('change', changeFilter);
+  uploadFilterControls.removeEventListener('change', enterFilterHandler);
 };
 
 var filterImagePreview = upload.querySelector('.filter-image-preview');
@@ -65,16 +70,21 @@ var changeFilter = function (event) {
     lastSelectedClass = classToAdd;
   }
 };
+// Открытие формы загрузки фото по enter
+uploadSelectImage.addEventListener('keyup', enterFilterHandler);
 
+// Открытие формы
 uploadFile.addEventListener('change', function () {
   showModal();
 });
-
+// Закрытие формы
 uploadCancel.addEventListener('click', function () {
   hideModal();
 });
 
+//
 // Изменение масштаба изображения
+//
 var resizeButtonDec = uploadOverlay.querySelector('.upload-resize-controls-button-dec');
 var resizeButtonInc = uploadOverlay.querySelector('.upload-resize-controls-button-inc');
 var resizeControlsField = uploadOverlay.querySelector('.upload-resize-controls-value');
