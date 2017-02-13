@@ -15,14 +15,3 @@ window.initializeFilters = function (event) {
     lastSelectedClass = classToAdd;
   }
 };
-// var changeFilter = function (event) {
-//   var target = event.target;
-//
-//   if (target.tagName.toLowerCase() === 'input' && target.getAttribute('name') === 'upload-filter') {
-//     var classToAdd = target.getAttribute('id').slice(7);
-//
-//     filterImagePreview.classList.remove(lastSelectedClass);
-//     filterImagePreview.classList.add(classToAdd);
-//     lastSelectedClass = classToAdd;
-//   }
-// };

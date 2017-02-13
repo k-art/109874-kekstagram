@@ -12,9 +12,8 @@ var ESCAPE_KEY_CODE = 27;
 
 var uploadFilterControls = upload.querySelector('.upload-filter-controls');
 
-var resizeButtonDec = uploadOverlay.querySelector('.upload-resize-controls-button-dec');
-var resizeButtonInc = uploadOverlay.querySelector('.upload-resize-controls-button-inc');
-var resizeControlsField = uploadOverlay.querySelector('.upload-resize-controls-value');
+var resizeControls = uploadOverlay.querySelector('.upload-resize-controls');
+
 
 var isActivateEvent = function (event) {
   return event.keyCode && event.keyCode === ENTER_KEY_CODE;
@@ -73,6 +72,4 @@ uploadCancel.addEventListener('click', function () {
 });
 
 // Изменение масштаба изображения
-resizeControlsField.setAttribute('value', '100%');
-resizeButtonDec.addEventListener('click', window.createScale);
-resizeButtonInc.addEventListener('click', window.createScale);
+window.createScale(resizeControls, 25, '100%');
