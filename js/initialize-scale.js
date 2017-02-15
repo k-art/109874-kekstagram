@@ -19,8 +19,8 @@ window.createScale = function (element, step, initScale) {
   filterImagePreview.style.msTransform = 'scale(' + parseInt(initScale, 10) / 100 + ')';
   filterImagePreview.style.webkitTransform = 'scale(' + parseInt(initScale, 10) / 100 + ')';
 
-  element.addEventListener('click', function (currentElement) {
-    var target = currentElement.target;
+  element.addEventListener('click', function (event) {
+    var target = event.target;
 
     if (target.tagName.toLowerCase() === 'button' && target.classList.contains('upload-resize-controls-button')) {
       var currentButton = target;
