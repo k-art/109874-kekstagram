@@ -1,17 +1,19 @@
 'use strict';
 
-var filterImagePreview = document.querySelector('.filter-image-preview');
-var lastSelectedClass;
-
 // Применение фильтра к изображению
-window.initializeFilters = function (event) {
-  var target = event.target;
+window.initializeFilters = (function () {
+  var filterImagePreview = document.querySelector('.filter-image-preview');
+  var lastSelectedClass;
 
-  if (target.tagName.toLowerCase() === 'input' && target.getAttribute('name') === 'upload-filter') {
-    var classToAdd = target.getAttribute('id').slice(7);
+  return function (event) {
+    var target = event.target;
 
-    filterImagePreview.classList.remove(lastSelectedClass);
-    filterImagePreview.classList.add(classToAdd);
-    lastSelectedClass = classToAdd;
-  }
-};
+    if (target.tagName.toLowerCase() === 'input' && target.getAttribute('name') === 'upload-filter') {
+      var classToAdd = target.getAttribute('id').slice(7);
+
+      filterImagePreview.classList.remove(lastSelectedClass);
+      filterImagePreview.classList.add(classToAdd);
+      lastSelectedClass = classToAdd;
+    }
+  };
+})();
