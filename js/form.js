@@ -12,8 +12,9 @@
   var ESCAPE_KEY_CODE = 27;
 
   var uploadFilterControls = upload.querySelector('.upload-filter-controls');
-
+  var filterImagePreview = document.querySelector('.filter-image-preview');
   var resizeControls = uploadOverlay.querySelector('.upload-resize-controls');
+  var resizeControlsField = uploadOverlay.querySelector('.upload-resize-controls-value');
 
 
   var isActivateEvent = function (event) {
@@ -33,8 +34,7 @@
 // закрытие модального окна по Esc
   var escKeydownHandler = function (event) {
     if (event.keyCode && event.keyCode === ESCAPE_KEY_CODE) {
-      uploadOverlay.classList.add('invisible');
-      uploadSelectImage.classList.remove('invisible');
+      hideModal();
     }
   };
 
@@ -57,7 +57,7 @@
     document.removeEventListener('keydown', escKeydownHandler);
 
     uploadFilterControls.removeEventListener('change', window.initializeFilters);
-    uploadFilterControls.removeEventListener('change', enterFilterHandler);
+    uploadFilterControls.removeEventListener('keyup', enterFilterHandler);
   };
 
 // Открытие формы загрузки фото по enter
@@ -73,6 +73,14 @@
   });
 
 // Изменение масштаба изображения
-  window.createScale(resizeControls, 25, '100%');
+
+  var adjustScale = function (scale) {
+    resizeControlsField.setAttribute('value', scale);
+    filterImagePreview.style.transform = 'scale(' + parseInt(scale, 10) / 100 + ')';
+    filterImagePreview.style.msTransform = 'scale(' + parseInt(scale, 10) / 100 + ')';
+    filterImagePreview.style.webkitTransform = 'scale(' + parseInt(scale, 10) / 100 + ')';
+  };
+
+  window.createScale(resizeControls, 25, adjustScale);
 
 })();
