@@ -73,14 +73,17 @@
   });
 
 // Изменение масштаба изображения
-
   var adjustScale = function (scale) {
     resizeControlsField.setAttribute('value', scale);
     filterImagePreview.style.transform = 'scale(' + parseInt(scale, 10) / 100 + ')';
     filterImagePreview.style.msTransform = 'scale(' + parseInt(scale, 10) / 100 + ')';
     filterImagePreview.style.webkitTransform = 'scale(' + parseInt(scale, 10) / 100 + ')';
   };
-
   window.createScale(resizeControls, 25, adjustScale);
 
+// Применение фильтра к изображению
+//   var applyFilter = function(newFilter, oldFilter) {
+//     filterImagePreview.classList.remove(oldFilter);
+//     filterImagePreview.classList.add(newFilter);
+//   };
 })();
