@@ -82,8 +82,8 @@
   window.createScale(resizeControls, 25, adjustScale);
 
 // Применение фильтра к изображению
-//   var applyFilter = function(newFilter, oldFilter) {
-//     filterImagePreview.classList.remove(oldFilter);
-//     filterImagePreview.classList.add(newFilter);
-//   };
+  window.applyFilter = function (newFilter, oldFilter) {
+    filterImagePreview.classList.remove(oldFilter);
+    filterImagePreview.classList.add(newFilter);
+  };
 })();
