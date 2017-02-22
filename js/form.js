@@ -34,7 +34,7 @@
     uploadSelectImage.classList.add('invisible');
 
     document.addEventListener('keydown', escKeydownHandler);
-    customInitializeFilters.onOpenModal();
+    customInitializeFilters.enable();
   };
 
 // закрытие модального окна
@@ -43,7 +43,7 @@
     uploadSelectImage.classList.remove('invisible');
 
     document.removeEventListener('keydown', escKeydownHandler);
-    customInitializeFilters.onCloseModal();
+    customInitializeFilters.disable();
   };
 
 // Открытие формы загрузки фото по enter

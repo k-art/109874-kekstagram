@@ -5,7 +5,7 @@
     var initializeFilter = {};
     var lastSelectedClass;
 
-    var onChangeFilter = function (event) {
+    var filterChangeHandler = function (event) {
       var target = event.target;
 
       if (target.tagName.toLowerCase() === 'input' && target.getAttribute('name') === 'upload-filter') {
@@ -17,13 +17,13 @@
       }
     };
 
-    initializeFilter.onOpenModal = function () {
-      filterElement.addEventListener('change', onChangeFilter);
+    initializeFilter.enable = function () {
+      filterElement.addEventListener('change', filterChangeHandler);
       filterElement.addEventListener('keyup', window.utils.enterFilterHandler);
     };
 
-    initializeFilter.onCloseModal = function () {
-      filterElement.removeEventListener('change', onChangeFilter);
+    initializeFilter.disable = function () {
+      filterElement.removeEventListener('change', filterChangeHandler);
       filterElement.removeEventListener('keyup', window.utils.enterFilterHandler);
     };
 
