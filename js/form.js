@@ -26,7 +26,9 @@
     filterImagePreview.classList.add(newFilter);
   };
 
-  var customInitializeFilters = window.initializeFilters(applyFilter);
+  var customInitializeFilters = function (event) {
+    window.initializeFilters(event, applyFilter);
+  };
 
 // показ модального окна
   var showModal = function () {
