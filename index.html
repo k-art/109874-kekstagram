@@ -23,16 +23,16 @@
 <div class="upload">
   <form class="upload-form upload-image" id="upload-select-image" method="post" enctype="multipart/form-data">
     <input type="file" id="upload-file" class="upload-input" name="filename" required>
-    <label class="upload-file upload-control" for="upload-file" tabindex="0"></label>
+    <label class="upload-file upload-control" for="upload-file" tabindex="1"></label>
     <button class="upload-submit upload-control" type="submit"></button>
   </form>
 
   <div class="upload-overlay invisible" role="dialog" aria-labelledby="upload-filter">
     <form class="upload-form upload-filter" id="upload-filter" method="post" enctype="multipart/form-data">
       <fieldset class="upload-resize-controls">
-        <button type="button" class="upload-resize-control upload-resize-controls-button upload-resize-controls-button-dec">–</button><!--
-        --><input type="text" class="upload-resize-control upload-resize-controls-value" value="100%" readonly /><!--
-        --><button type="button" class="upload-resize-control upload-resize-controls-button upload-resize-controls-button-inc">+</button>
+        <button type="button" class="upload-resize-control upload-resize-controls-button upload-resize-controls-button-dec" tabindex="1">–</button><!--
+        --><input type="text" class="upload-resize-control upload-resize-controls-value" value="100%" readonly tabindex="1"/><!--
+        --><button type="button" class="upload-resize-control upload-resize-controls-button upload-resize-controls-button-inc" tabindex="1">+</button>
       </fieldset>
 
       <div class="upload-form-preview">
@@ -41,7 +41,7 @@
       </div>
 
       <fieldset class="upload-filter-controls">
-        <div class="upload-filter-level">
+        <div class="upload-filter-level" tabindex="1">
           <div class="upload-filter-level-line">
             <div class="upload-filter-level-pin"></div>
             <div class="upload-filter-level-val"></div>
@@ -49,46 +49,46 @@
         </div>
 
         <input type="radio" name="upload-filter" id="upload-filter-none" value="none" checked>
-        <label class="upload-filter-label" for="upload-filter-none" tabindex="0">
+        <label class="upload-filter-label" for="upload-filter-none" tabindex="1">
           <div class="upload-filter-preview"></div>
           Оригинал
         </label>
 
         <input type="radio" name="upload-filter" id="upload-filter-chrome" value="chrome">
-        <label class="upload-filter-label upload-filter-label-chrome" for="upload-filter-chrome" tabindex="0">
+        <label class="upload-filter-label upload-filter-label-chrome" for="upload-filter-chrome" tabindex="1">
           <div class="upload-filter-preview"></div>
           Хром
         </label>
 
         <input type="radio" name="upload-filter" id="upload-filter-sepia" value="sepia">
-        <label class="upload-filter-label upload-filter-label-sepia" for="upload-filter-sepia" tabindex="0">
+        <label class="upload-filter-label upload-filter-label-sepia" for="upload-filter-sepia" tabindex="1">
           <div class="upload-filter-preview"></div>
           Сепия
         </label>
 
         <input type="radio" name="upload-filter" id="upload-filter-marvin" value="marvin">
-        <label class="upload-filter-label upload-filter-label-marvin" for="upload-filter-marvin" tabindex="0">
+        <label class="upload-filter-label upload-filter-label-marvin" for="upload-filter-marvin" tabindex="1">
           <div class="upload-filter-preview"></div>
           Марвин
         </label>
 
         <input type="radio" name="upload-filter" id="upload-filter-phobos" value="phobos">
-        <label class="upload-filter-label upload-filter-label-phobos" for="upload-filter-phobos" tabindex="0">
+        <label class="upload-filter-label upload-filter-label-phobos" for="upload-filter-phobos" tabindex="1">
           <div class="upload-filter-preview"></div>
           Фобос
         </label>
 
         <input type="radio" name="upload-filter" id="upload-filter-heat" value="heat">
-        <label class="upload-filter-label upload-filter-label-heat" for="upload-filter-heat" tabindex="0">
+        <label class="upload-filter-label upload-filter-label-heat" for="upload-filter-heat" tabindex="1">
           <div class="upload-filter-preview"></div>
           Зной
         </label>
       </fieldset>
 
-      <textarea class="upload-form-description" name="upload-description" placeholder="Ваш комментарий..."></textarea>
+      <textarea class="upload-form-description" name="upload-description" placeholder="Ваш комментарий..." tabindex="1"></textarea>
 
-      <button class="upload-form-cancel" type="reset" id="upload-cancel"></button>
-      <button class="upload-form-submit" type="submit" id="upload-submit">Отправить</button>
+      <button class="upload-form-cancel" type="reset" id="upload-cancel" tabindex="1"></button>
+      <button class="upload-form-submit" type="submit" id="upload-submit" tabindex="1">Отправить</button>
     </form>
   </div>
 

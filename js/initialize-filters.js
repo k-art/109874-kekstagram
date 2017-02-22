@@ -1,20 +1,32 @@
 'use strict';
 
-// Применение фильтра к изображению
-window.initializeFilters = (function () {
+(function () {
+  window.initializeFilters = function (filterElement, applyFilter) {
+    var initializeFilter = {};
+    var lastSelectedClass;
 
-  var lastSelectedClass;
+    var onChange = function (event) {
+      var target = event.target;
 
-  return function (event, applyFilter) {
-    var target = event.target;
+      if (target.tagName.toLowerCase() === 'input' && target.getAttribute('name') === 'upload-filter') {
+        var classToAdd = target.getAttribute('id').slice(7);
 
-    if (target.tagName.toLowerCase() === 'input' && target.getAttribute('name') === 'upload-filter') {
-      var classToAdd = target.getAttribute('id').slice(7);
+        applyFilter(classToAdd, lastSelectedClass);
 
-      applyFilter(classToAdd, lastSelectedClass);
+        lastSelectedClass = classToAdd;
+      }
+    };
 
-      lastSelectedClass = classToAdd;
-    }
+    initializeFilter.onOpen = function () {
+      filterElement.addEventListener('change', onChange);
+      filterElement.addEventListener('keyup', window.utils.enterFilterHandler);
+    };
+
+    initializeFilter.onClose = function () {
+      filterElement.removeEventListener('change', onChange);
+      filterElement.removeEventListener('keyup', window.utils.enterFilterHandler);
+    };
+
+    return initializeFilter;
   };
 })();
-

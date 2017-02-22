@@ -26,9 +26,7 @@
     filterImagePreview.classList.add(newFilter);
   };
 
-  var customInitializeFilters = function (event) {
-    window.initializeFilters(event, applyFilter);
-  };
+  var customInitializeFilters = window.initializeFilters(uploadFilterControls, applyFilter);
 
 // показ модального окна
   var showModal = function () {
@@ -36,9 +34,7 @@
     uploadSelectImage.classList.add('invisible');
 
     document.addEventListener('keydown', escKeydownHandler);
-
-    uploadFilterControls.addEventListener('change', customInitializeFilters);
-    uploadFilterControls.addEventListener('keyup', window.utils.enterFilterHandler);
+    customInitializeFilters.onOpen();
   };
 
 // закрытие модального окна
@@ -47,9 +43,7 @@
     uploadSelectImage.classList.remove('invisible');
 
     document.removeEventListener('keydown', escKeydownHandler);
-
-    uploadFilterControls.removeEventListener('change', customInitializeFilters);
-    uploadFilterControls.removeEventListener('keyup', window.utils.enterFilterHandler);
+    customInitializeFilters.onClose();
   };
 
 // Открытие формы загрузки фото по enter
