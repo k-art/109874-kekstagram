@@ -1,19 +1,20 @@
 'use strict';
-
+(function () {
 // Применение фильтра к изображению
-window.initializeFilters = (function () {
+  window.initializeFilters = function (applyFilter) {
 
-  var lastSelectedClass;
+    var lastSelectedClass;
 
-  return function (event) {
-    var target = event.target;
+    return function (event) {
+      var target = event.target;
 
-    if (target.tagName.toLowerCase() === 'input' && target.getAttribute('name') === 'upload-filter') {
-      var classToAdd = target.getAttribute('id').slice(7);
+      if (target.tagName.toLowerCase() === 'input' && target.getAttribute('name') === 'upload-filter') {
+        var classToAdd = target.getAttribute('id').slice(7);
 
-      window.applyFilter(classToAdd, lastSelectedClass);
+        applyFilter(classToAdd, lastSelectedClass);
 
-      lastSelectedClass = classToAdd;
-    }
+        lastSelectedClass = classToAdd;
+      }
+    };
   };
 })();

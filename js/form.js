@@ -8,35 +8,25 @@
   var uploadOverlay = upload.querySelector('.upload-overlay');
   var uploadCancel = upload.querySelector('#upload-cancel');
 
-  var ENTER_KEY_CODE = 13;
-  var ESCAPE_KEY_CODE = 27;
-
   var uploadFilterControls = upload.querySelector('.upload-filter-controls');
   var filterImagePreview = document.querySelector('.filter-image-preview');
   var resizeControls = uploadOverlay.querySelector('.upload-resize-controls');
   var resizeControlsField = uploadOverlay.querySelector('.upload-resize-controls-value');
 
-
-  var isActivateEvent = function (event) {
-    return event.keyCode && event.keyCode === ENTER_KEY_CODE;
-  };
-
-  var isLabel = function (element) {
-    return element.tagName.toLowerCase() === 'label';
-  };
-
-  var enterFilterHandler = function (event) {
-    if (isActivateEvent(event) && isLabel(event.target)) {
-      event.target.click();
-    }
-  };
-
 // закрытие модального окна по Esc
   var escKeydownHandler = function (event) {
-    if (event.keyCode && event.keyCode === ESCAPE_KEY_CODE) {
+    if (window.utils.isDeactivateEvent(event)) {
       hideModal();
     }
   };
+
+  // Применение фильтра к изображению
+  var applyFilter = function (newFilter, oldFilter) {
+    filterImagePreview.classList.remove(oldFilter);
+    filterImagePreview.classList.add(newFilter);
+  };
+
+  var customInitializeFilters = window.initializeFilters(applyFilter);
 
 // показ модального окна
   var showModal = function () {
@@ -45,8 +35,8 @@
 
     document.addEventListener('keydown', escKeydownHandler);
 
-    uploadFilterControls.addEventListener('change', window.initializeFilters);
-    uploadFilterControls.addEventListener('keyup', enterFilterHandler);
+    uploadFilterControls.addEventListener('change', customInitializeFilters);
+    uploadFilterControls.addEventListener('keyup', window.utils.enterFilterHandler);
   };
 
 // закрытие модального окна
@@ -56,12 +46,12 @@
 
     document.removeEventListener('keydown', escKeydownHandler);
 
-    uploadFilterControls.removeEventListener('change', window.initializeFilters);
-    uploadFilterControls.removeEventListener('keyup', enterFilterHandler);
+    uploadFilterControls.removeEventListener('change', customInitializeFilters);
+    uploadFilterControls.removeEventListener('keyup', window.utils.enterFilterHandler);
   };
 
 // Открытие формы загрузки фото по enter
-  uploadSelectImage.addEventListener('keyup', enterFilterHandler);
+  uploadSelectImage.addEventListener('keyup', window.utils.enterFilterHandler);
 
 // Открытие формы
   uploadFile.addEventListener('change', function () {
@@ -81,9 +71,4 @@
   };
   window.createScale(resizeControls, 25, adjustScale);
 
-// Применение фильтра к изображению
-  window.applyFilter = function (newFilter, oldFilter) {
-    filterImagePreview.classList.remove(oldFilter);
-    filterImagePreview.classList.add(newFilter);
-  };
 })();

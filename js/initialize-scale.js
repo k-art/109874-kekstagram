@@ -8,13 +8,13 @@ window.createScale = (function () {
   var resizeButtonInc = uploadOverlay.querySelector('.upload-resize-controls-button-inc');
   var resizeControlsField = uploadOverlay.querySelector('.upload-resize-controls-value');
 
-  return function (element, step, callback) {
+  return function (element, step, adjustScale) {
 
     var MIN_VALUE = 25;
     var MAX_VALUE = 100;
     var STEP = step;
 
-    callback(100);
+    adjustScale(100);
 
     element.addEventListener('click', function (event) {
       var target = event.target;
@@ -38,7 +38,7 @@ window.createScale = (function () {
           currentValue = MAX_VALUE;
         }
       }
-      callback(currentValue);
+      adjustScale(currentValue);
     });
   };
 })();
