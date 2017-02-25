@@ -18,6 +18,14 @@ window.utils = (function () {
       if (window.utils.isActivateEvent(event) && window.utils.isLabel(event.target)) {
         event.target.click();
       }
+    },
+    // закрытие модального окна по Esc
+    escKeydownHandler: function (element) {
+      document.addEventListener('keydown', function (event) {
+        if (window.utils.isDeactivateEvent(event)) {
+          element();
+        }
+      });
     }
   };
 })();

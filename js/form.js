@@ -13,13 +13,6 @@
   var resizeControls = uploadOverlay.querySelector('.upload-resize-controls');
   var resizeControlsField = uploadOverlay.querySelector('.upload-resize-controls-value');
 
-// закрытие модального окна по Esc
-  var escKeydownHandler = function (event) {
-    if (window.utils.isDeactivateEvent(event)) {
-      hideModal();
-    }
-  };
-
   // Применение фильтра к изображению
   var applyFilter = function (newFilter, oldFilter) {
     filterImagePreview.classList.remove(oldFilter);
@@ -33,7 +26,7 @@
     uploadOverlay.classList.remove('invisible');
     uploadSelectImage.classList.add('invisible');
 
-    document.addEventListener('keydown', escKeydownHandler);
+    window.utils.escKeydownHandler(hideModal);
     customInitializeFilters.enable();
   };
 
@@ -42,7 +35,6 @@
     uploadOverlay.classList.add('invisible');
     uploadSelectImage.classList.remove('invisible');
 
-    document.removeEventListener('keydown', escKeydownHandler);
     customInitializeFilters.disable();
   };
 
