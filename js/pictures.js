@@ -69,7 +69,7 @@ window.pictures = (function () {
     renderPictures(newPictures);
   };
 
-  var picturesFiltersHandler = function (event) {
+  var picturesFiltersChangeHandler = function (event) {
     var target = event.target;
     if (target.tagName.toLowerCase() === 'input' && target.classList.contains('filters-radio')) {
       chosePicturesFilter(target.getAttribute('value'));
@@ -78,7 +78,7 @@ window.pictures = (function () {
 
   var showPicturesFilters = function () {
     picturesFilters.classList.remove('hidden');
-    picturesFilters.addEventListener('change', picturesFiltersHandler);
+    picturesFilters.addEventListener('change', picturesFiltersChangeHandler);
     picturesFilters.addEventListener('keyup', window.utils.enterKeyHandler);
   };
 

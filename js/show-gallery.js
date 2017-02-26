@@ -8,12 +8,12 @@ window.showGallery = (function () {
 
   var closeGalleryOverlay = function () {
     galleryOverlay.classList.add('invisible');
-    galleryOverlayCloseBtn.removeEventListener('click', closeGalleryOverlay);
-    galleryOverlayCloseBtn.removeEventListener('keydown', closeBtnEnterKeyHandler);
+    galleryOverlayCloseBtn.removeEventListener('click', onGalleryOverlayCloseBtnClick);
+    galleryOverlayCloseBtn.removeEventListener('keydown', onGalleryOverlayCloseBtnKeydown);
     document.removeEventListener('keydown', documentEscHandler);
   };
 
-  var closeBtnEnterKeyHandler = function (event) {
+  var onGalleryOverlayCloseBtnKeydown = function (event) {
     if (window.utils.isActivateEvent(event)) {
       closeGalleryOverlay(event);
     }
@@ -25,6 +25,10 @@ window.showGallery = (function () {
     }
   };
 
+  var onGalleryOverlayCloseBtnClick = function () {
+    closeGalleryOverlay();
+  };
+
   return function (data) {
     galleryOverlay.classList.remove('invisible');
     galleryOverlayImage.setAttribute('src', data.url);
@@ -33,7 +37,7 @@ window.showGallery = (function () {
     commentsCount.innerText = data.comments.length;
 
     document.addEventListener('keydown', documentEscHandler);
-    galleryOverlayCloseBtn.addEventListener('click', closeGalleryOverlay);
-    galleryOverlayCloseBtn.addEventListener('keydown', closeBtnEnterKeyHandler);
+    galleryOverlayCloseBtn.addEventListener('click', onGalleryOverlayCloseBtnClick);
+    galleryOverlayCloseBtn.addEventListener('keydown', onGalleryOverlayCloseBtnKeydown);
   };
 })();

@@ -1,5 +1,5 @@
 'use strict';
-window.createScale = (function () {
+window.initializeScale = (function () {
   var upload = document.querySelector('.upload');
   var uploadOverlay = upload.querySelector('.upload-overlay');
   var resizeButtonDec = uploadOverlay.querySelector('.upload-resize-controls-button-dec');
