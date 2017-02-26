@@ -1,5 +1,4 @@
 'use strict';
-
 (function () {
   var upload = document.querySelector('.upload');
   var uploadSelectImage = upload.querySelector('#upload-select-image');
@@ -19,44 +18,47 @@
     filterImagePreview.classList.add(newFilter);
   };
 
-  var customInitializeFilters = window.initializeFilters(uploadFilterControls, applyFilter);
+  var filterInitializer = window.initializeFilters(uploadFilterControls, applyFilter);
 
-// показ модального окна
+  var documentEscHandler = function (event) {
+    if (window.utils.isDeactivateEvent(event)) {
+      hideModal();
+    }
+  };
+
+  // показ модального окна
   var showModal = function () {
     uploadOverlay.classList.remove('invisible');
     uploadSelectImage.classList.add('invisible');
-
-    window.utils.escKeydownHandler(hideModal);
-    customInitializeFilters.enable();
+    document.addEventListener('keydown', documentEscHandler);
+    filterInitializer.enable();
   };
 
-// закрытие модального окна
+  // закрытие модального окна
   var hideModal = function () {
     uploadOverlay.classList.add('invisible');
     uploadSelectImage.classList.remove('invisible');
-
-    customInitializeFilters.disable();
+    uploadFile.value = null;
+    document.removeEventListener('keydown', documentEscHandler);
+    filterInitializer.disable();
   };
 
-// Открытие формы загрузки фото по enter
-  uploadSelectImage.addEventListener('keyup', window.utils.enterFilterHandler);
+  // Открытие формы загрузки фото по enter
+  uploadSelectImage.addEventListener('keyup', window.utils.enterKeyHandler);
 
-// Открытие формы
-  uploadFile.addEventListener('change', function () {
-    showModal();
-  });
-// Закрытие формы
-  uploadCancel.addEventListener('click', function () {
-    hideModal();
-  });
+  // Открытие формы
+  uploadFile.addEventListener('change', showModal);
 
-// Изменение масштаба изображения
+  // Закрытие формы
+  uploadCancel.addEventListener('click', hideModal);
+
+  // Изменение масштаба изображения
   var adjustScale = function (scale) {
     resizeControlsField.setAttribute('value', scale);
     filterImagePreview.style.transform = 'scale(' + parseInt(scale, 10) / 100 + ')';
     filterImagePreview.style.msTransform = 'scale(' + parseInt(scale, 10) / 100 + ')';
     filterImagePreview.style.webkitTransform = 'scale(' + parseInt(scale, 10) / 100 + ')';
   };
-  window.createScale(resizeControls, 25, adjustScale);
 
+  window.createScale(resizeControls, 25, adjustScale);
 })();

@@ -1,8 +1,7 @@
 'use strict';
-
 (function () {
   window.initializeFilters = function (filterElement, applyFilter) {
-    var initializeFilter = {};
+    var FilterInitializer = {};
     var lastSelectedClass;
 
     var filterChangeHandler = function (event) {
@@ -12,21 +11,20 @@
         var classToAdd = target.getAttribute('id').slice(7);
 
         applyFilter(classToAdd, lastSelectedClass);
-
         lastSelectedClass = classToAdd;
       }
     };
 
-    initializeFilter.enable = function () {
+    FilterInitializer.enable = function () {
       filterElement.addEventListener('change', filterChangeHandler);
-      filterElement.addEventListener('keyup', window.utils.enterFilterHandler);
+      filterElement.addEventListener('keyup', window.utils.enterKeyHandler);
     };
 
-    initializeFilter.disable = function () {
+    FilterInitializer.disable = function () {
       filterElement.removeEventListener('change', filterChangeHandler);
-      filterElement.removeEventListener('keyup', window.utils.enterFilterHandler);
+      filterElement.removeEventListener('keyup', window.utils.enterKeyHandler);
     };
 
-    return initializeFilter;
+    return FilterInitializer;
   };
 })();

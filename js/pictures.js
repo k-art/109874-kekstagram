@@ -1,5 +1,4 @@
 'use strict';
-
 window.pictures = (function () {
   var pictures = [];
   var DATA_URL = 'https://intensive-javascript-server-myophkugvq.now.sh/kekstagram/data';
@@ -11,6 +10,7 @@ window.pictures = (function () {
   var loadData = function (onDataLoaded) {
     window.load(DATA_URL, function (data) {
       pictures = JSON.parse(data);
+
       if (({}).toString.call(onDataLoaded) === '[object Function]') {
         onDataLoaded(pictures);
       }
@@ -18,8 +18,8 @@ window.pictures = (function () {
   };
 
   var renderPictures = function (loadedPictures) {
-    parentNodeForAdd.innerHTML = '';
     var fragment = document.createDocumentFragment();
+    parentNodeForAdd.innerHTML = '';
 
     loadedPictures.forEach(function (item) {
       var newElement = elementToClone.cloneNode(true);
@@ -32,34 +32,41 @@ window.pictures = (function () {
         event.preventDefault();
         window.showGallery(item);
       });
+
       fragment.appendChild(newElement);
     });
+
     parentNodeForAdd.appendChild(fragment);
   };
 
   var chosePicturesFilter = function (value) {
+    var FILTER_NEW = 'new';
+    var FILTER_DISCUSSED = 'discussed';
+    var FILTER_POPULAR = 'popular';
     var newPictures = [];
+    var copiedPictures = pictures.slice();
 
-    if (value === 'new') {
-      var copiedPictures = pictures.slice();
+    switch (value) {
+      case FILTER_NEW:
+        for (var i = 0; i < 10; i++) {
+          var index = window.utils.getRandomIndex(copiedPictures);
+          newPictures = newPictures.concat(copiedPictures[index]);
+          copiedPictures.splice(index, 1);
+        }
+        break;
 
-      for (var i = 0; i < 10; i++) {
-        var index = window.utils.getRandomIndex(copiedPictures);
-        newPictures = newPictures.concat(copiedPictures[index]);
-        copiedPictures.splice(index, 1);
-      }
-      renderPictures(newPictures);
+      case FILTER_DISCUSSED:
+        newPictures = copiedPictures.sort(function (left, right) {
+          return right.comments.length - left.comments.length;
+        });
+        break;
 
-    } else if (value === 'discussed') {
-      newPictures = pictures.slice().sort(function (left, right) {
-        return right.comments.length - left.comments.length;
-      });
-      renderPictures(newPictures);
-
-    } else if (value === 'popular') {
-      newPictures = pictures.slice();
-      renderPictures(newPictures);
+      case FILTER_POPULAR:
+      default:
+        newPictures = copiedPictures;
     }
+
+    renderPictures(newPictures);
   };
 
   var picturesFiltersHandler = function (event) {
@@ -68,9 +75,11 @@ window.pictures = (function () {
       chosePicturesFilter(target.getAttribute('value'));
     }
   };
+
   var showPicturesFilters = function () {
     picturesFilters.classList.remove('hidden');
     picturesFilters.addEventListener('change', picturesFiltersHandler);
+    picturesFilters.addEventListener('keyup', window.utils.enterKeyHandler);
   };
 
   loadData(renderPictures);
