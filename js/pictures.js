@@ -39,7 +39,7 @@ window.pictures = (function () {
     parentNodeForAdd.appendChild(fragment);
   };
 
-  var chosePicturesFilter = function (value) {
+  var choosePicturesFilter = function (value) {
     var FILTER_NEW = 'new';
     var FILTER_DISCUSSED = 'discussed';
     var FILTER_POPULAR = 'popular';
@@ -72,7 +72,7 @@ window.pictures = (function () {
   var picturesFiltersChangeHandler = function (event) {
     var target = event.target;
     if (target.tagName.toLowerCase() === 'input' && target.classList.contains('filters-radio')) {
-      chosePicturesFilter(target.getAttribute('value'));
+      choosePicturesFilter(target.getAttribute('value'));
     }
   };
 
