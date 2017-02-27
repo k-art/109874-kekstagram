@@ -10,8 +10,8 @@ window.initializeScale = (function () {
   var MAX_VALUE = 100;
   var DEFAULT_VALUE = 100;
 
-  return function (element, step, adjustScale) {
-    adjustScale(DEFAULT_VALUE);
+  return function (element, step, callback) {
+    callback(DEFAULT_VALUE);
 
     element.addEventListener('click', function (event) {
       var target = event.target;
@@ -34,7 +34,7 @@ window.initializeScale = (function () {
           }
         }
 
-        adjustScale(currentValue);
+        callback(currentValue);
       }
     });
   };

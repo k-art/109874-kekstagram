@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-  window.initializeFilters = function (filterElement, applyFilter) {
+  window.initializeFilters = function (filterElement, callback) {
     var FilterInitializer = {};
     var lastSelectedClass;
 
@@ -10,7 +10,7 @@
       if (target.tagName.toLowerCase() === 'input' && target.getAttribute('name') === 'upload-filter') {
         var classToAdd = target.getAttribute('id').slice(7);
 
-        applyFilter(classToAdd, lastSelectedClass);
+        callback(classToAdd, lastSelectedClass);
         lastSelectedClass = classToAdd;
       }
     };
