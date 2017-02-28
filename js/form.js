@@ -12,6 +12,8 @@
   var resizeControls = uploadOverlay.querySelector('.upload-resize-controls');
   var resizeControlsField = uploadOverlay.querySelector('.upload-resize-controls-value');
 
+  var STEP_VALUE = 25;
+
   // Применение фильтра к изображению
   var applyFilter = function (newFilter, oldFilter) {
     filterImagePreview.classList.remove(oldFilter);
@@ -24,6 +26,14 @@
     if (window.utils.isDeactivateEvent(event)) {
       hideModal();
     }
+  };
+
+  var uploadCancelClickHandler = function () {
+    hideModal();
+  };
+
+  var uploadFileChangeHandler = function () {
+    showModal();
   };
 
   // показ модального окна
@@ -47,10 +57,10 @@
   uploadSelectImage.addEventListener('keyup', window.utils.enterKeyHandler);
 
   // Открытие формы
-  uploadFile.addEventListener('change', showModal);
+  uploadFile.addEventListener('change', uploadFileChangeHandler);
 
   // Закрытие формы
-  uploadCancel.addEventListener('click', hideModal);
+  uploadCancel.addEventListener('click', uploadCancelClickHandler);
 
   // Изменение масштаба изображения
   var adjustScale = function (scale) {
@@ -60,5 +70,5 @@
     filterImagePreview.style.webkitTransform = 'scale(' + parseInt(scale, 10) / 100 + ')';
   };
 
-  window.createScale(resizeControls, 25, adjustScale);
+  window.initializeScale(resizeControls, STEP_VALUE, adjustScale);
 })();

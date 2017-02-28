@@ -1,27 +1,27 @@
 'use strict';
 (function () {
-  window.initializeFilters = function (filterElement, applyFilter) {
+  window.initializeFilters = function (filterElement, cb) {
     var FilterInitializer = {};
     var lastSelectedClass;
 
-    var filterChangeHandler = function (event) {
+    var filterElementChangeHandler = function (event) {
       var target = event.target;
 
       if (target.tagName.toLowerCase() === 'input' && target.getAttribute('name') === 'upload-filter') {
         var classToAdd = target.getAttribute('id').slice(7);
 
-        applyFilter(classToAdd, lastSelectedClass);
+        cb(classToAdd, lastSelectedClass);
         lastSelectedClass = classToAdd;
       }
     };
 
     FilterInitializer.enable = function () {
-      filterElement.addEventListener('change', filterChangeHandler);
+      filterElement.addEventListener('change', filterElementChangeHandler);
       filterElement.addEventListener('keyup', window.utils.enterKeyHandler);
     };
 
     FilterInitializer.disable = function () {
-      filterElement.removeEventListener('change', filterChangeHandler);
+      filterElement.removeEventListener('change', filterElementChangeHandler);
       filterElement.removeEventListener('keyup', window.utils.enterKeyHandler);
     };
 

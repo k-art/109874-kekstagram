@@ -1,5 +1,5 @@
 'use strict';
-window.createScale = (function () {
+window.initializeScale = (function () {
   var upload = document.querySelector('.upload');
   var uploadOverlay = upload.querySelector('.upload-overlay');
   var resizeButtonDec = uploadOverlay.querySelector('.upload-resize-controls-button-dec');
@@ -10,8 +10,8 @@ window.createScale = (function () {
   var MAX_VALUE = 100;
   var DEFAULT_VALUE = 100;
 
-  return function (element, step, adjustScale) {
-    adjustScale(DEFAULT_VALUE);
+  return function (element, step, cb) {
+    cb(DEFAULT_VALUE);
 
     element.addEventListener('click', function (event) {
       var target = event.target;
@@ -34,7 +34,7 @@ window.createScale = (function () {
           }
         }
 
-        adjustScale(currentValue);
+        cb(currentValue);
       }
     });
   };
