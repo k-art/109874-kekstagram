@@ -1,8 +1,14 @@
 'use strict';
 (function () {
-  window.initializeFilters = function (filterElement, cb) {
+  window.initializeFilters = function (filterElement) {
+    var filterImagePreview = document.querySelector('.filter-image-preview');
     var FilterInitializer = {};
     var lastSelectedClass;
+
+    var applyFilter = function (newFilter, oldFilter) {
+      filterImagePreview.classList.remove(oldFilter);
+      filterImagePreview.classList.add(newFilter);
+    };
 
     var filterElementChangeHandler = function (event) {
       var target = event.target;
@@ -10,7 +16,7 @@
       if (target.tagName.toLowerCase() === 'input' && target.getAttribute('name') === 'upload-filter') {
         var classToAdd = target.getAttribute('id').slice(7);
 
-        cb(classToAdd, lastSelectedClass);
+        applyFilter(classToAdd, lastSelectedClass);
         lastSelectedClass = classToAdd;
       }
     };

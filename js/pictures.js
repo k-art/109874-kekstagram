@@ -1,7 +1,7 @@
 'use strict';
 window.pictures = (function () {
   var pictures = [];
-  var DATA_URL = 'https://intensive-javascript-server-myophkugvq.now.sh/kekstagram/data';
+  var DATA_URL = '/kekstagram/data';
   var templateElement = document.querySelector('#picture-template');
   var elementToClone = templateElement.content.querySelector('.picture');
   var parentNodeForAdd = document.querySelector('.pictures');

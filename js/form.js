@@ -15,12 +15,8 @@
   var STEP_VALUE = 25;
 
   // Применение фильтра к изображению
-  var applyFilter = function (newFilter, oldFilter) {
-    filterImagePreview.classList.remove(oldFilter);
-    filterImagePreview.classList.add(newFilter);
-  };
 
-  var filterInitializer = window.initializeFilters(uploadFilterControls, applyFilter);
+  var filterInitializer = window.initializeFilters(uploadFilterControls);
 
   var documentEscHandler = function (event) {
     if (window.utils.isDeactivateEvent(event)) {

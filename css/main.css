@@ -117,21 +117,32 @@ body {
 
 .upload-filter-label-chrome .upload-filter-preview,
 .filter-chrome {
-  -webkit-filter: grayscale(1);
-          filter: grayscale(1);
+  -webkit-filter: grayscale(0.75);
+          filter: grayscale(0.75);
 }
 
 .upload-filter-label-sepia .upload-filter-preview,
 .filter-sepia {
-  -webkit-filter: sepia(1);
-          filter: sepia(1);
+  -webkit-filter: sepia(0.75);
+          filter: sepia(0.75);
 }
 
 .upload-filter-label-marvin .upload-filter-preview,
 .filter-marvin {
-  -webkit-filter: invert(100%);
-          filter: invert(100%);
+  -webkit-filter: invert(0.75);
+          filter: invert(0.75);
 }
+
+.upload-filter-label-phobos .upload-filter-preview,
+.filter-phobos {
+  -webkit-filter: hue-rotate(270deg);
+  filter: hue-rotate(270deg);
+
+}.upload-filter-label-heat .upload-filter-preview,
+ .filter-heat {
+   -webkit-filter: contrast(2.25);
+   filter: contrast(2.25);
+ }
 
 .upload-input {
   visibility: hidden;
@@ -354,7 +365,7 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   height: 18px;
 
   position: absolute;
-  left: 20%;
+  left: 75%;
   top: 50%;
 
   margin: -9px 0 0;
@@ -363,10 +374,11 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   border-radius: 50%;
   transform: translateX(-50%);
   cursor: move;
+  z-index: 10;
 }
 
 .upload-filter-level-val {
-  width: 20%;
+  width: 75%;
   height: 100%;
 
   position: absolute;
