@@ -2,25 +2,12 @@
 (function () {
   window.initializeFilters = function (filterElement) {
     var filterImagePreview = document.querySelector('.filter-image-preview');
-    var filterLevelSlider = document.querySelector('.upload-filter-level');
     var FilterInitializer = {};
     var lastSelectedClass;
-    // var filterLevelValue = document.querySelector('.upload-filter-level-val');
-    //
-    // console.log(filterLevelValue.getAttribute('width'));
 
-    var addFilterLevelSlider = function (classElem) {
-      filterLevelSlider.classList.add('invisible');
-      if (classElem !== 'filter-none') {
-        filterLevelSlider.classList.remove('invisible');
-      }
-    };
     var applyFilter = function (newFilter, oldFilter) {
       filterImagePreview.classList.remove(oldFilter);
-      console.log(filterImagePreview);
-      // filterImagePreview.style.filter.clear();
       filterImagePreview.classList.add(newFilter);
-      addFilterLevelSlider(newFilter);
     };
 
     var filterElementChangeHandler = function (event) {
